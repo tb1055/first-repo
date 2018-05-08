@@ -1,0 +1,45 @@
+#!/usr/bin/perl
+#-------------------------------------------------------------
+# Name      tfind
+# Purpose   use find to locate text in a document
+# Invoke    tfind textToFind
+#-------------------------------------------------------------
+use strict;
+#use warnings;
+
+printf "Running tfind\n";
+
+my $oscmd = "";
+my $searchKey = "";
+my $searchKey = $ARGV[0];
+
+
+my $searchFolder = "";
+my $searchFolder = $ARGV[1];
+
+
+
+printf "searchKey = [$searchKey]\n";
+
+if ($searchKey eq "") {
+   printf "No search string supplied";
+   exit;
+   }
+
+
+if ($searchFolder eq "") {
+   print "Search current folder\n";
+   $oscmd = "find . | xargs grep '$searchKey'";
+   }
+else {
+   $oscmd = "find $searchFolder | xargs grep '$searchKey'";
+   }
+
+
+printf "OSCMD = [$oscmd]\n";
+
+
+my $result = `$oscmd`;
+
+printf "RESULT = [$result]\n";
+
